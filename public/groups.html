@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groups - Splityfy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Splityfy" class="logo-img">
+        <span>Splityfy</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-mobile-header" style="display: none;">
+      <span style="font-weight: 600; font-size: 1.1rem;">Menu</span>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <aside class="sidebar">
+      <div class="user-info">
+        <h3 id="userName">User</h3>
+        <p id="userEmail">user@email.com</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="groups.html" class="active">Groups</a></li>
+        <li><a href="add-expense.html">Add/Remove Expense</a></li>
+        <li><a href="add-member.html">Add/Remove Member</a></li>
+        <li><a href="settlement.html">Settlement</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="dashboard-header">
+        <h1>Groups</h1>
+        <button class="btn-secondary" style="margin-bottom: 24px; padding: 12px 24px; font-size: 1rem;" onclick="showCreateGroupModal()">+ Create Group</button>
+      </div>
+      <input type="text" id="searchGroups" placeholder="🔍 Search groups..." style="width: 100%; max-width: 400px; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; margin-bottom: 24px;" onkeyup="filterGroups()">
+
+      <div class="groups-grid" id="groupsList">
+        <p class="empty-message">No groups yet. Create your first group!</p>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal" id="addMemberModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAddMemberModal()">&times;</span>
+      <h2>Add Member</h2>
+      <form id="addMemberForm">
+        <div class="form-group">
+          <label for="newMemberEmail">Member Email</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" id="newMemberEmail" name="newMemberEmail" required style="flex: 1;">
+            <button type="button" class="btn-secondary" onclick="searchMemberForModal()">Find</button>
+          </div>
+          <div id="modalFoundUser" style="margin-top: 8px; display: none; padding: 10px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
+            <p style="margin: 0; color: #166534;">User found: <strong id="modalFoundUserName"></strong></p>
+          </div>
+          <div id="modalUserNotFound" style="margin-top: 8px; display: none; padding: 10px; background: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
+            <p style="margin: 0; color: #991b1b;">User not found. Ask them to sign up first.</p>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Add Member</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="createGroupModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCreateGroupModal()">&times;</span>
+      <h2>Create New Group</h2>
+      <form id="createGroupForm">
+        <div class="form-group">
+          <label for="groupName">Group Name</label>
+          <input type="text" id="groupName" name="groupName" required>
+        </div>
+        <div class="form-group">
+          <label for="groupDescription">Description (Optional)</label>
+          <input type="text" id="groupDescription" name="groupDescription">
+        </div>
+        <div class="form-group">
+          <label for="memberEmail">Add Member by Email (Optional)</label>
+          <input type="email" id="memberEmail" name="memberEmail" placeholder="friend@email.com">
+          <button type="button" class="btn-secondary" onclick="searchUser()">Add Member</button>
+        </div>
+        <div id="selectedMembers"></div>
+        <button type="submit" class="btn-primary">Create Group</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/groups.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

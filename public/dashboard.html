@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Splityfy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Splityfy" class="logo-img">
+        <span>Splityfy</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-mobile-header" style="display: none;">
+      <span style="font-weight: 600; font-size: 1.1rem;">Menu</span>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <aside class="sidebar">
+      <div class="user-info">
+        <h3 id="userName">Welcome, User</h3>
+        <p id="userEmail">user@email.com</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="groups.html">Groups</a></li>
+        <li><a href="add-expense.html">Add/Remove Expense</a></li>
+        <li><a href="add-member.html">Add/Remove Member</a></li>
+        <li><a href="settlement.html">Settlement</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="dashboard-header">
+        <h1>Dashboard</h1>
+      </div>
+
+      <div style="display: flex; gap: 16px; width: 100%;">
+        <div class="stat-card" style="flex: 1; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <h3 style="color: white;">Total I Paid</h3>
+          <p class="stat-value" id="totalPaid" style="color: white;">₹0.00</p>
+          <p class="stat-label" style="color: rgba(255,255,255,0.8);">Money you spent on all groups</p>
+        </div>
+        <div class="stat-card" style="flex: 1; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+          <h3 style="color: white;">Total Groups</h3>
+          <p class="stat-value" id="totalGroups" style="color: white;">0</p>
+          <p class="stat-label" style="color: rgba(255,255,255,0.8);">Groups you created or joined</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px;">
+        <div class="dashboard-section">
+          <h2>Recent Transactions</h2>
+          <div class="recent-list" id="recentExpenses" style="background: white; border-radius: 12px; overflow: hidden; max-height: 300px; overflow-y: auto;">
+            <p class="empty-message" style="padding: 20px; text-align: center; color: #6b7280;">No recent expenses. Start by creating a group!</p>
+          </div>
+          <a href="add-expense.html" class="btn-primary" style="margin-top: 12px; display: inline-block; width: 40%; text-align: center;">Add New Expense</a>
+        </div>
+
+        <div class="dashboard-section">
+          <h2>Your Groups</h2>
+          <div class="groups-list" id="userGroups" style="background: white; border-radius: 12px; overflow: hidden; max-height: 300px; overflow-y: auto;">
+            <p class="empty-message" style="padding: 20px; text-align: center; color: #6b7280;">No groups yet. Create one to get started!</p>
+          </div>
+          <a href="groups.html" class="btn-primary" style="margin-top: 12px; display: inline-block; width: 40%; text-align: center;">View All Groups</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

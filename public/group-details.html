@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Details - Splityfy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Splityfy" class="logo-img">
+        <span>Splityfy</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-mobile-header" style="display: none;">
+      <span style="font-weight: 600; font-size: 1.1rem;">Menu</span>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <aside class="sidebar">
+      <div class="user-info">
+        <h3 id="userName">User</h3>
+        <p id="userEmail">user@email.com</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="groups.html" class="active">Groups</a></li>
+        <li><a href="add-expense.html">Add/Remove Expense</a></li>
+        <li><a href="add-member.html">Add/Remove Member</a></li>
+        <li><a href="settlement.html">Settlement</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-content">
+      <a href="groups.html" class="btn-secondary" style="display: inline-block; margin-bottom: 16px; padding: 10px 18px; font-size: 0.9rem;">← Back</a>
+      
+      <div class="dashboard-header" style="margin-top: 16px;">
+        <h1 id="groupName">Group Details</h1>
+      </div>
+
+      <p id="groupDescription" style="color: #6b7280; margin-bottom: 24px;"></p>
+
+      <div class="dashboard-section">
+        <h2>Members</h2>
+        <div class="members-list" id="membersList"></div>
+      </div>
+
+      <div class="dashboard-section">
+        <h2>Member Balances</h2>
+        <p style="color: #6b7280; margin-bottom: 16px;">How much each member has spent for this group</p>
+        <div class="balance-list" id="memberBalances"></div>
+      </div>
+
+      <div class="dashboard-section">
+        <h2>Expenses</h2>
+        <div class="expenses-list" id="expensesList">
+          <p class="empty-message">No expenses yet. Add one!</p>
+        </div>
+      </div>
+
+      <div class="dashboard-section" id="splitCalculation" style="display: none;">
+        <h2>Split Calculation</h2>
+        <div id="splitResult" style="padding: 16px; background: #f3f4f6; border-radius: 10px; line-height: 1.6;"></div>
+      </div>
+
+      <div class="dashboard-section" style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+        <button class="btn-primary" style="width: 40%; max-width: 300px; padding: 16px; font-size: 1.1rem;" onclick="calculateAndShowSplit()">Calculate Split</button>
+        <button id="saveSettlementBtn" class="btn-secondary" style="width: 40%; max-width: 300px; padding: 16px; font-size: 1.1rem; display: none; margin-left: 10px;" onclick="saveSplitToSettlement()">Save to Settlement</button>
+      </div>
+    </main>
+  </div>
+
+   <div class="modal" id="addExpenseModal">
+     <div class="modal-content">
+       <span class="close" onclick="closeAddExpenseModal()">&times;</span>
+       <h2>Add Expense</h2>
+       <form id="addExpenseForm">
+         <div class="form-group">
+           <label for="expenseDescription">Description</label>
+           <input type="text" id="expenseDescription" required>
+         </div>
+         <div class="form-group">
+           <label for="expenseAmount">Amount</label>
+           <input type="number" id="expenseAmount" step="0.01" required>
+         </div>
+         <div class="form-group">
+           <label for="paidBy">Paid By</label>
+           <select id="paidBy" required></select>
+         </div>
+         <div class="form-group">
+           <label for="splitType">Split Type</label>
+           <select id="splitType" onchange="toggleSplitOptions()">
+             <option value="equal">Equal</option>
+             <option value="unequal">Unequal</option>
+           </select>
+         </div>
+         <div id="unequalSplits" style="display: none;"></div>
+         <button type="submit" class="btn-primary">Add Expense</button>
+       </form>
+     </div>
+   </div>
+
+   <div class="modal" id="splitSettlementModal">
+     <div class="modal-content">
+       <span class="close" onclick="closeSplitSettlementModal()">&times;</span>
+       <h2>Split Settlement</h2>
+       <div id="settlementSummary" style="margin-bottom: 20px; padding: 16px; background: #f3f4f6; border-radius: 10px;">
+         <!-- Settlement amounts will be populated here -->
+       </div>
+       <div id="settlementActions">
+         <!-- Settlement buttons will be populated here -->
+       </div>
+     </div>
+   </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/group-details.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

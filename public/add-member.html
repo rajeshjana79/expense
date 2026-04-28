@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Member - Splityfy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Splityfy" class="logo-img">
+        <span>Splityfy</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-mobile-header" style="display: none;">
+      <span style="font-weight: 600; font-size: 1.1rem;">Menu</span>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <aside class="sidebar">
+      <div class="user-info">
+        <h3 id="userName">User</h3>
+        <p id="userEmail">user@email.com</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="groups.html">Groups</a></li>
+        <li><a href="add-expense.html">Add/Remove Expense</a></li>
+        <li><a href="add-member.html" class="active">Add/Remove Member</a></li>
+        <li><a href="settlement.html">Settlement</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="dashboard-header">
+        <h1>Add/Remove Member</h1>
+      </div>
+
+       <div class="expense-form">
+         <h2>Add Member to Group</h2>
+         <p style="color: #6b7280; margin-bottom: 24px;">Select a group and enter the member's email to add them.</p>
+         <form id="addMemberForm">
+           <div class="form-group">
+             <label for="groupSelect">Select Group</label>
+             <select id="groupSelect" name="groupSelect" onchange="loadGroupMembers()" required>
+               <option value="">-- Select a group --</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <label for="memberEmail">Member Email</label>
+             <div style="display: flex; gap: 8px;">
+               <input type="email" id="memberEmail" name="memberEmail" placeholder="friend@email.com" required style="flex: 1;">
+               <button type="button" class="btn-secondary" onclick="searchUser()">Find</button>
+             </div>
+<div id="foundUser" style="margin-top: 8px; display: none; padding: 10px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
+                <p style="margin: 0; color: #166534;">User found: <strong id="foundUserName"></strong> (<span id="foundUserEmail"></span>)</p>
+              </div>
+              <div id="alreadyMember" style="margin-top: 8px; display: none; padding: 10px; background: #fef3c7; border-radius: 8px; border: 1px solid #fcd34d;">
+                <p style="margin: 0; color: #92400e;">User is already in this group: <strong id="alreadyMemberName"></strong> (<span id="alreadyMemberEmail"></span>)</p>
+              </div>
+              <div id="userNotFound" style="margin-top: 8px; display: none; padding: 10px; background: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
+                <p style="margin: 0; color: #991b1b;">User not found. Ask them to sign up first.</p>
+              </div>
+           </div>
+           <button type="submit" class="btn-primary">Add Member</button>
+         </form>
+       </div>
+
+       <div class="expense-form" style="margin-top: 32px;">
+         <h2>Remove Member from Group</h2>
+         <p style="color: #6b7280; margin-bottom: 24px;">Select a group and choose a member to remove them.</p>
+         <form id="removeMemberForm">
+           <div class="form-group">
+             <label for="removeGroupSelect">Select Group</label>
+             <select id="removeGroupSelect" name="removeGroupSelect" onchange="loadGroupMembersForRemove()" required>
+               <option value="">-- Select a group --</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <label for="memberSelect">Select Member</label>
+             <select id="memberSelect" name="memberSelect" required>
+               <option value="">-- Select a member --</option>
+             </select>
+           </div>
+           <button type="submit" class="btn-primary">Remove Member</button>
+         </form>
+       </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/add-member.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

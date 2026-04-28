@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settlement - Splityfy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Splityfy" class="logo-img">
+        <span>Splityfy</span>
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-mobile-header" style="display: none;">
+      <span style="font-weight: 600; font-size: 1.1rem;">Menu</span>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <aside class="sidebar">
+      <div class="user-info">
+        <h3 id="userName">User</h3>
+        <p id="userEmail">user@email.com</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="groups.html">Groups</a></li>
+        <li><a href="add-expense.html">Add/Remove Expense</a></li>
+        <li><a href="add-member.html">Add/Remove Member</a></li>
+        <li><a href="settlement.html" class="active">Settlement</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="dashboard-header">
+        <h1>Settlement</h1>
+      </div>
+
+      <div class="expense-form">
+        <h2>Select Group</h2>
+        <p style="color: #6b7280; margin-bottom: 24px;">Select a group to view saved split calculations.</p>
+        <div class="form-group">
+          <label for="settleGroupSelect">Select Group</label>
+          <select id="settleGroupSelect" onchange="loadSavedSplitsByGroup()" required>
+            <option value="">-- Select a group --</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="dashboard-section" style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #e5e7eb;">
+        <h2>Saved Split Calculations</h2>
+        <div id="savedSplitsList">
+          <p style="color: #6b7280; padding: 20px; text-align: center;">Select a group to view saved calculations.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/settlement.js"></script>
+  <script>
+    function toggleMobileMenu() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
