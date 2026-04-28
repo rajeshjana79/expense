@@ -12,8 +12,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'expense_share_secret_key_2024';
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/expense_sharing')
+mongoose.connect(process.env.MONGODB_URI )
+// mongoose.connect('mongodb://localhost:27017/expense_sharing')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
